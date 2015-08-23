@@ -15,10 +15,14 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *searchResults;
 @property (nonatomic, strong) WebViewController *webview;
+@property (nonatomic, strong) UILabel *messageLabel;
+
 
 @end
 
 @implementation ViewController
+
+@synthesize messageLabel;
 
 - (void)viewDidLoad
 {
@@ -30,7 +34,7 @@
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     
     // Display a message when the table is empty
-    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     
     messageLabel.text = @"👆🏼Tap on Search box to search Question.";
     messageLabel.textColor = [UIColor colorWithRed:0.9082 green:0.9264 blue:0.9317 alpha:1.0];
@@ -40,10 +44,8 @@
     [messageLabel sizeToFit];
     
     self.tableView.backgroundView = messageLabel;
-    self.tableView.backgroundColor =  [UIColor colorWithRed:0.1587 green:0.2182 blue:0.3032 alpha:1.0];
-    
-   
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.1587 green:0.2182 blue:0.3032 alpha:1.0];
+    self.tableView.separatorStyle =   UITableViewCellSeparatorStyleNone;
     
 }
 
@@ -58,7 +60,11 @@
     
     cell.textLabel.text = [self.searchResults[indexPath.row] title];
     cell.textLabel.numberOfLines = 2;
+    cell.textLabel.textColor = [UIColor colorWithRed:0.9082 green:0.9264 blue:0.9317 alpha:1.0];
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:16.0f]; //Custom Font
+    cell.backgroundColor = [UIColor clearColor];
+    
+    cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Detail.png"]]; //Discloser Indicator
     return cell;
 }
 
@@ -77,6 +83,10 @@
     NSMutableArray *tempArray = [jsonDict objectForKey:@"items"];
       
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine; //TableViewSeprator set to Default
+    [self.tableView setSeparatorColor:[UIColor colorWithRed:0.6889 green:0.7137 blue:0.7345 alpha:1.0]];
+    
+    self.messageLabel.hidden = YES; //Hide the message label
+
       
     for (NSDictionary *tempDict in tempArray) {
         Question *question = [[Question alloc] init];
@@ -84,7 +94,7 @@
         question.link = [tempDict objectForKey:@"link"];
         [self.searchResults addObject:question];
     }
-    [self.tableView reloadData];
+        [self.tableView reloadData];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
