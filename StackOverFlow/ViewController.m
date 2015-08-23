@@ -63,8 +63,6 @@
     cell.textLabel.textColor = [UIColor colorWithRed:0.9082 green:0.9264 blue:0.9317 alpha:1.0];
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:16.0f]; //Custom Font
     cell.backgroundColor = [UIColor clearColor];
-    
-    cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Detail.png"]]; //Discloser Indicator
     return cell;
 }
 
