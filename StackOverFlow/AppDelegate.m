@@ -17,13 +17,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch........
+    // Override point for customization after application launch.
     
     //status bar color
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     
     //TimeInterval Splash Screen
-    [NSThread sleepForTimeInterval:2.0];
+    [NSThread sleepForTimeInterval:1.0];
     
     //Navigation bar tintcolor,shadow etc
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.9608 green: 0.7098 blue: 0.2235 alpha: 1.0]];

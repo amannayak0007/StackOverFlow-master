@@ -63,6 +63,8 @@
     cell.textLabel.textColor = [UIColor colorWithRed:0.9082 green:0.9264 blue:0.9317 alpha:1.0];
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:16.0f]; //Custom Font
     cell.backgroundColor = [UIColor clearColor];
+    
+    cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Detail.png"]]; //Discloser Indicator
     return cell;
 }
 
@@ -79,20 +81,20 @@
                                                                       error:nil];
     
     NSMutableArray *tempArray = [jsonDict objectForKey:@"items"];
-      
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine; //TableViewSeprator set to Default
     [self.tableView setSeparatorColor:[UIColor colorWithRed:0.6889 green:0.7137 blue:0.7345 alpha:1.0]];
     
     self.messageLabel.hidden = YES; //Hide the message label
-
-      
+    
+    
     for (NSDictionary *tempDict in tempArray) {
         Question *question = [[Question alloc] init];
         question.title = [tempDict objectForKey:@"title"];
         question.link = [tempDict objectForKey:@"link"];
         [self.searchResults addObject:question];
     }
-        [self.tableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -104,7 +106,7 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-   
+    
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
@@ -112,7 +114,7 @@
         [[segue destinationViewController] setUrl:string];
         
     }
-
+    
 }
 
 @end
