@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "Question.h"
+#import "tableViewCell.h"
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
@@ -16,7 +17,6 @@
 @property (nonatomic, strong) NSMutableArray *searchResults;
 @property (nonatomic, strong) WebViewController *webview;
 @property (nonatomic, strong) UILabel *messageLabel;
-
 
 @end
 
@@ -44,28 +44,16 @@
     [messageLabel sizeToFit];
     
     self.tableView.backgroundView = messageLabel;
-    self.tableView.backgroundColor = [UIColor colorWithRed:0.1587 green:0.2182 blue:0.3032 alpha:1.0];
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.1686 green:0.1843 blue:0.2118 alpha:1.0];
     self.tableView.separatorStyle =   UITableViewCellSeparatorStyleNone;
     
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (void)viewDidAppear:(BOOL)animated
 {
-    return [self.searchResults count];
-}
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    
-    cell.textLabel.text = [self.searchResults[indexPath.row] title];
-    cell.textLabel.numberOfLines = 2;
-    cell.textLabel.textColor = [UIColor colorWithRed:0.9082 green:0.9264 blue:0.9317 alpha:1.0];
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:16.0f]; //Custom Font
-    cell.backgroundColor = [UIColor clearColor];
-    
-    cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Detail.png"]]; //Discloser Indicator
-    return cell;
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+
 }
 
 - (void)stackOverflowSearch:(NSString *)searchString
@@ -81,20 +69,22 @@
                                                                       error:nil];
     
     NSMutableArray *tempArray = [jsonDict objectForKey:@"items"];
-    
+      
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine; //TableViewSeprator set to Default
     [self.tableView setSeparatorColor:[UIColor colorWithRed:0.6889 green:0.7137 blue:0.7345 alpha:1.0]];
     
     self.messageLabel.hidden = YES; //Hide the message label
-    
-    
+
+      
     for (NSDictionary *tempDict in tempArray) {
         Question *question = [[Question alloc] init];
         question.title = [tempDict objectForKey:@"title"];
         question.link = [tempDict objectForKey:@"link"];
+        question.answer_count = [tempDict objectForKey:@"answer_count"];
+        question.display_name = [tempDict objectForKey:@"view_count"];
         [self.searchResults addObject:question];
     }
-    [self.tableView reloadData];
+        [self.tableView reloadData];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -105,8 +95,24 @@
     
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.searchResults count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    tableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
+    cell.titleLabel.text = [self.searchResults[indexPath.row] title];
+    cell.postview.text = [NSString stringWithFormat:@"%@",[self.searchResults[indexPath.row] display_name]];
+    cell.answercount.text = [NSString stringWithFormat:@"%@", [self.searchResults[indexPath.row] answer_count]];
+    cell.backgroundColor = [UIColor clearColor];
+    return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+   
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
@@ -114,7 +120,7 @@
         [[segue destinationViewController] setUrl:string];
         
     }
-    
+
 }
 
 @end

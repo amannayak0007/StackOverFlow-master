@@ -17,6 +17,7 @@
 		FD115CE91B83926E00FD891C /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = FD115CE41B83926E00FD891C /* Question.m */; };
 		FD115CEA1B83926E00FD891C /* SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = FD115CE61B83926E00FD891C /* SplashScreen.m */; };
 		FD115CEB1B83926E00FD891C /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD115CE81B83926E00FD891C /* WebViewController.m */; };
+		FDC8A6DF1B93785700AA6159 /* tableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8A6DE1B93785700AA6159 /* tableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		FD115CE61B83926E00FD891C /* SplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashScreen.m; sourceTree = "<group>"; };
 		FD115CE71B83926E00FD891C /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		FD115CE81B83926E00FD891C /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		FDC8A6DD1B93785700AA6159 /* tableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tableViewCell.h; sourceTree = "<group>"; };
+		FDC8A6DE1B93785700AA6159 /* tableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +99,8 @@
 				FD115CC51B83916400FD891C /* ViewController.m */,
 				FD115CE31B83926E00FD891C /* Question.h */,
 				FD115CE41B83926E00FD891C /* Question.m */,
+				FDC8A6DD1B93785700AA6159 /* tableViewCell.h */,
+				FDC8A6DE1B93785700AA6159 /* tableViewCell.m */,
 				FD115CE71B83926E00FD891C /* WebViewController.h */,
 				FD115CE81B83926E00FD891C /* WebViewController.m */,
 				FD115CE51B83926E00FD891C /* SplashScreen.h */,
@@ -235,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD115CC61B83916400FD891C /* ViewController.m in Sources */,
+				FDC8A6DF1B93785700AA6159 /* tableViewCell.m in Sources */,
 				FD115CEB1B83926E00FD891C /* WebViewController.m in Sources */,
 				FD115CE91B83926E00FD891C /* Question.m in Sources */,
 				FD115CC31B83916400FD891C /* AppDelegate.m in Sources */,

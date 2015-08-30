@@ -11,7 +11,6 @@
 
 @interface Question : NSObject
 
-
-@property (nonatomic, strong) NSString *title, *link;
+@property (nonatomic, strong) NSString *title, *link, *answer_count, *display_name;
 
 @end
