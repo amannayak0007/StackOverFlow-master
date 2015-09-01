@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "Question.h"
 #import "tableViewCell.h"
+#import "Reachability.h"
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
@@ -18,11 +19,13 @@
 @property (nonatomic, strong) WebViewController *webview;
 @property (nonatomic, strong) UILabel *messageLabel;
 
+
 @end
 
 @implementation ViewController
 
 @synthesize messageLabel;
+
 
 - (void)viewDidLoad
 {
@@ -47,13 +50,23 @@
     self.tableView.backgroundColor = [UIColor colorWithRed:0.1686 green:0.1843 blue:0.2118 alpha:1.0];
     self.tableView.separatorStyle =   UITableViewCellSeparatorStyleNone;
     
+    
+    
+    
+}
+
+-(BOOL)IsConnected{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    
+    return !(networkStatus == NotReachable);
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-
+    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-
+    
 }
 
 - (void)stackOverflowSearch:(NSString *)searchString
@@ -69,13 +82,13 @@
                                                                       error:nil];
     
     NSMutableArray *tempArray = [jsonDict objectForKey:@"items"];
-      
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine; //TableViewSeprator set to Default
     [self.tableView setSeparatorColor:[UIColor colorWithRed:0.6889 green:0.7137 blue:0.7345 alpha:1.0]];
     
     self.messageLabel.hidden = YES; //Hide the message label
-
-      
+    
+    
     for (NSDictionary *tempDict in tempArray) {
         Question *question = [[Question alloc] init];
         question.title = [tempDict objectForKey:@"title"];
@@ -84,14 +97,32 @@
         question.display_name = [tempDict objectForKey:@"view_count"];
         [self.searchResults addObject:question];
     }
-        [self.tableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [searchBar resignFirstResponder];
-    [self.searchResults removeAllObjects];
-    [self stackOverflowSearch:searchBar.text];
+    
+    if([self IsConnected]){
+        
+        [searchBar resignFirstResponder];
+        [self.searchResults removeAllObjects];
+        [self stackOverflowSearch:searchBar.text];
+        
+    }
+    
+    else {
+        
+        //Network error if connection not available.
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
+                                                        message:@"You must be connected to the internet to use this app."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+    }
+    
     
 }
 
@@ -108,11 +139,12 @@
     cell.postview.text = [NSString stringWithFormat:@"%@",[self.searchResults[indexPath.row] display_name]];
     cell.answercount.text = [NSString stringWithFormat:@"%@", [self.searchResults[indexPath.row] answer_count]];
     cell.backgroundColor = [UIColor clearColor];
+    
     return cell;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-   
+    
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
@@ -120,7 +152,7 @@
         [[segue destinationViewController] setUrl:string];
         
     }
-
+    
 }
 
 @end

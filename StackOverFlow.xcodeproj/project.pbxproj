@@ -18,6 +18,7 @@
 		FD115CEA1B83926E00FD891C /* SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = FD115CE61B83926E00FD891C /* SplashScreen.m */; };
 		FD115CEB1B83926E00FD891C /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD115CE81B83926E00FD891C /* WebViewController.m */; };
 		FDC8A6DF1B93785700AA6159 /* tableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8A6DE1B93785700AA6159 /* tableViewCell.m */; };
+		FDF47CE41B95E67300F615F3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FDF47CE31B95E67300F615F3 /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,8 @@
 		FD115CE81B83926E00FD891C /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		FDC8A6DD1B93785700AA6159 /* tableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tableViewCell.h; sourceTree = "<group>"; };
 		FDC8A6DE1B93785700AA6159 /* tableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tableViewCell.m; sourceTree = "<group>"; };
+		FDF47CE21B95E67300F615F3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		FDF47CE31B95E67300F615F3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +119,8 @@
 		FD115CBD1B83916400FD891C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FDF47CE21B95E67300F615F3 /* Reachability.h */,
+				FDF47CE31B95E67300F615F3 /* Reachability.m */,
 				FD115CBE1B83916400FD891C /* Info.plist */,
 				FD115CBF1B83916400FD891C /* main.m */,
 			);
@@ -241,6 +246,7 @@
 			files = (
 				FD115CC61B83916400FD891C /* ViewController.m in Sources */,
 				FDC8A6DF1B93785700AA6159 /* tableViewCell.m in Sources */,
+				FDF47CE41B95E67300F615F3 /* Reachability.m in Sources */,
 				FD115CEB1B83926E00FD891C /* WebViewController.m in Sources */,
 				FD115CE91B83926E00FD891C /* Question.m in Sources */,
 				FD115CC31B83916400FD891C /* AppDelegate.m in Sources */,
