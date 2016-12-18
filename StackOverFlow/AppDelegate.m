@@ -6,14 +6,7 @@
 //  Copyright (c) 2015 Aman. All rights reserved.
 //
 //DIGITAL HOLE (www.digitalhole.co)
-<<<<<<< HEAD
-//////////
 
-=======
-//testing 1
-//testing 2
-//testing 3
->>>>>>> origin/master
 
 #import "AppDelegate.h"
 
